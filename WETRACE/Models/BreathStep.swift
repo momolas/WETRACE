@@ -10,7 +10,7 @@ import Foundation
 enum BreathStep: String {
     case inhale = "Inspirer"
     case hold = "Retenir"
-    case hum = "Bourdonner (Mmm...)"
+    case hum = "Bourdonner"
     case pause = "Repos"
 
     var duration: Double {
