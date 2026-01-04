@@ -45,48 +45,20 @@ struct HummingExerciseView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
                 .foregroundStyle(.gray)
-			
-			// Instructions de temps
-			HStack(spacing: 20) {
-				TimeIndicator(label: "In", value: "4s")
-				TimeIndicator(label: "Hold", value: "4s")
-				TimeIndicator(label: "Hum", value: "6s")
-				TimeIndicator(label: "Rest", value: "2s")
-			}
-			.padding(.bottom, 50)
         }
-        .onAppear {
-            runAnimation()
-        }
-    }
+        .task {
+            while !Task.isCancelled {
+                HapticManager.instance.triggerLight()
+                withAnimation(.easeInOut(duration: step.duration)) {
+                    isAnimating.toggle()
+                }
 
-    func runAnimation() {
-        HapticManager.instance.triggerLight()
-		withAnimation(.easeInOut(duration: step.duration)) {
-			if step == .inhale { isAnimating = true }
-			if step == .hum { isAnimating = false }
-		}
+                try? await Task.sleep(for: .seconds(step.duration))
 
-        Task {
-            try? await Task.sleep(for: .seconds(step.duration))
-            step = (step == .inhale ? .hold : (step == .hold ? .hum : (step == .hum ? .pause : .inhale)))
-            runAnimation()
+                if !Task.isCancelled {
+                    step = (step == .inhale ? .hold : (step == .hold ? .hum : (step == .hum ? .pause : .inhale)))
+                }
+            }
         }
     }
-}
-
-struct TimeIndicator: View {
-	var label: String
-	var value: String
-	var body: some View {
-		VStack {
-			Text(label).font(.caption).foregroundColor(.gray)
-			Text(value).font(.headline)
-		}
-	}
-}
-
-#Preview {
-	HummingExerciseView(isNightMode: true)
-		.preferredColorScheme(.dark)
 }

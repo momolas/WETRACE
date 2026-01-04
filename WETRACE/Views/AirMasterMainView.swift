@@ -84,6 +84,11 @@ struct AirMasterMainView: View {
                 Tab("Humming", systemImage: "waveform.path", value: 1) {
                     HummingExerciseView(isNightMode: isNightMode)
                 }
+
+                // --- ONGLET 3 : EXERCISES ---
+                Tab("Exercices", systemImage: "list.bullet.clipboard", value: 2) {
+                    ExerciseListView()
+                }
             }
             .accentColor(isNightMode ? .red : .blue)
         }
