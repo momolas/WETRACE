@@ -40,11 +40,12 @@ struct AirMasterMainView: View {
                             Button(action: { vm.isPCRunning ? vm.stopAndSavePC() : vm.startPCTimer() }) {
                                 Text(vm.isPCRunning ? "STOP" : "MESURER PC")
                                     .font(.title3)
-                                    .bold()
+									.fontWeight(.semibold)
                                     .frame(width: 250, height: 60)
                                     .background(isNightMode ? Color.red.opacity(0.2) : Color.blue.opacity(0.1))
                                     .foregroundStyle(isNightMode ? .red : .blue)
-                                    .overlay(RoundedRectangle(cornerRadius: 30).stroke(isNightMode ? Color.red : Color.blue, lineWidth: 2))
+									.clipShape(.rect(cornerRadius: 10))
+                                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(isNightMode ? Color.red : Color.blue, lineWidth: 2))
                             }
 
                             Spacer()
@@ -57,9 +58,7 @@ struct AirMasterMainView: View {
                                     Text(score.formattedDate)
                                         .font(.caption2)
                                     Spacer()
-                                    Text(score.seconds, format: .number.precision(.fractionLength(0)))
-                                        .bold()
-                                    + Text("s")
+                                    Text("\(score.seconds, format: .number.precision(.fractionLength(0)))s")
                                         .bold()
                                 }
                                 .listRowBackground(isNightMode ? Color.black : Color(.secondarySystemBackground))
@@ -98,4 +97,8 @@ struct AirMasterMainView: View {
             NotificationManager.instance.scheduleMorningReminder()
         }
     }
+}
+
+#Preview {
+	AirMasterMainView()
 }

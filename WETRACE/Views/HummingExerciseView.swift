@@ -18,6 +18,8 @@ struct HummingExerciseView: View {
                 .font(.title)
                 .bold()
                 .foregroundStyle(isNightMode ? .red : .primary)
+			
+			Spacer()
 
             ZStack {
                 Circle()
@@ -30,13 +32,13 @@ struct HummingExerciseView: View {
                     Text(step.rawValue)
                         .font(.title2)
                         .bold()
-                    Text(step.duration, format: .number.precision(.fractionLength(0)))
-                        .font(.subheadline)
-                    + Text("s")
+                    Text("\(step.duration, format: .number.precision(.fractionLength(0)))s")
                         .font(.subheadline)
                 }
                 .foregroundStyle(isNightMode ? .red : .primary)
             }
+			
+			Spacer()
 
             Text("Expirez par le nez avec un bourdonnement sonore (Mmm...) pour maximiser le NO nasal.")
                 .font(.caption)
