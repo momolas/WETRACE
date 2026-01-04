@@ -11,7 +11,7 @@ import SwiftUI
 struct WETRACEApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+			AirMasterMainView()
         }
     }
 }
