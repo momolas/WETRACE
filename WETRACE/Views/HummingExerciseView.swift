@@ -23,10 +23,10 @@ struct HummingExerciseView: View {
 
             ZStack {
                 Circle()
-                    .stroke(isNightMode ? Color.red : Color.blue, lineWidth: 3)
+                    .stroke(isNightMode ? Color.red : Color.blue, lineWidth: 5)
                     .frame(width: 250, height: 250)
                     .scaleEffect(isAnimating ? 1.2 : 0.8)
-                    .opacity(isAnimating ? 0.3 : 1.0)
+                    //.opacity(isAnimating ? 0.3 : 1.0)
 
                 VStack {
                     Text(step.rawValue)
